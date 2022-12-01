@@ -1,7 +1,14 @@
 import prisma from '../database/prisma';
-import { v4 as uuidv4 } from 'uuid' 
+import { v4 as uuidv4 } from 'uuid'; 
+import PagarMeProvider from '../providers/pagarme.provider';
 
 class TransactionService {
+    payment_provider;
+    
+    constructor(paymentProvider) {
+        this.payment_provider = paymentProvider || PagarMeProvider
+    }
+
     async process({
         cartCode,
         paymentType,
@@ -40,6 +47,16 @@ class TransactionService {
                     billingState: billing.state,
                     billingZipCode: billing.zipCode              
                 }
+            })
+
+            this.payment_provider.process({
+                transactionCode: transaction.code,
+                total: transaction.total,
+                paymentType,
+                installments,
+                creditCard,
+                customer,
+                billing,
             })
 
             return transaction;
