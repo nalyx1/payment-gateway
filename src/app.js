@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'express'
 
-import cartsRoutes from './routes/carts.route'
+import cartsRoute from './routes/carts.route'
+import transactionsRoute from './routes/transactions.route';
 
 class App {
   constructor() {
@@ -16,7 +17,8 @@ class App {
   }
 
   routes() {
-    this.server.use(cartsRoutes);
+    this.server.use(cartsRoute);
+    this.server.use(transactionsRoute)
   }
 }
 

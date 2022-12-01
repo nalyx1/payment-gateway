@@ -12,9 +12,48 @@ datasource db {
 
 model Cart {
   id        String   @id @default(uuid())
-  code      String
+  code      String   @unique
   price     Float
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("carts")
+}
+
+model Transaction {
+  id                  String      @id @default(uuid())
+  cartCode            String
+  code                String      @unique
+  status              Status      @default(STARTED)
+  paymentType         PaymentType
+  installments        Int
+  total               Float
+  transactionId       String?
+  processorResponse   String?
+  customerEmail       String
+  customerName        String
+  customerMobile      String
+  customerDocument    String
+  billingAddress      String
+  billingNumber       String
+  billingNeighborhood String
+  billingCity         String
+  billingState        String
+  billingZipCode      String
+}
+
+enum Status {
+  STARTED
+  PROCESSING
+  PENDING
+  APPROVED
+  REFUSED
+  REFUNDED
+  CHARGEBACK
+  ERROR
+}
+
+enum PaymentType {
+  BILLET
+  CREDIT_CARD
 }

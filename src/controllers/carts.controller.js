@@ -6,7 +6,7 @@ class CartsController {
             const carts = await prisma.cart.findMany()
             return response.status(200).send({ status: 200, carts: carts })
         } catch (error) {
-            console.log(error)
+            console.error(error)
             return response.status(500).send({ status: 500, error: error})
         }
     }
@@ -26,7 +26,7 @@ class CartsController {
             })
             return response.status(201).send({ status: 201, message: cart})
         } catch (error) {
-            console.log(error)
+            console.error(error)
             return response.status(500).send({ status: 500, error: error})
         }
     }
@@ -38,7 +38,7 @@ class CartsController {
             if(!id || !code || !price) {
                 return response.status(400).send({ status: 400, error: `Informe todos os parametros`})
             }
-
+    
             const cart = await prisma.cart.update({
                 data: {
                     code,
@@ -54,7 +54,7 @@ class CartsController {
 
             return response.status(200).send({ status: 200, message: cart})
         } catch (error) {
-            console.log(error)
+            console.error(error)
             return response.status(500).send({ status: 500, error: error})
         }
     }
@@ -74,7 +74,7 @@ class CartsController {
 
             return response.status(204).send()
         } catch (error) {
-            console.log(error)
+            console.error(error)
             return response.status(500).send({ status: 500, error: error})
         }
     }
