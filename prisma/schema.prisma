@@ -12,8 +12,8 @@ datasource db {
 
 model Cart {
   id        String   @id @default(uuid())
-  code      String   @unique
-  price     Float
+  codigo    String   @unique
+  preco     Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -21,39 +21,41 @@ model Cart {
 }
 
 model Transaction {
-  id                  String      @id @default(uuid())
-  cartCode            String
-  code                String      @unique
-  status              Status      @default(STARTED)
-  paymentType         PaymentType
-  installments        Int
-  total               Float
-  transactionId       String?
-  processorResponse   String?
-  customerEmail       String
-  customerName        String
-  customerMobile      String
-  customerDocument    String
-  billingAddress      String
-  billingNumber       String
-  billingNeighborhood String
-  billingCity         String
-  billingState        String
-  billingZipCode      String
+  id                String      @id @default(uuid())
+  codigo            String      @unique
+  codigo_carrinho   String
+  status            Status      @default(INICIADA)
+  tipo_pagamento    PaymentType
+  parcelas          Int
+  total             Float
+  id_transacao      String?
+  resposta_gateway  String?
+  cliente_nome      String
+  cliente_email     String
+  cliente_telefone  String
+  cliente_documento String
+  endereco_rua      String
+  endereco_numero   String
+  endereco_bairro   String
+  endereco_cidade   String
+  endereco_estado   String
+  endereco_cep      String
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
 }
 
 enum Status {
-  STARTED
-  PROCESSING
-  PENDING
-  APPROVED
-  REFUSED
-  REFUNDED
-  CHARGEBACK
+  INICIADA
+  PROCESSANDO
+  PENDENTE
+  APROVADA
+  RECUSADA
+  REEMBOLSO
+  ESTORNO
   ERROR
 }
 
 enum PaymentType {
-  BILLET
-  CREDIT_CARD
+  BOLETO
+  CARTAO_CREDITO
 }

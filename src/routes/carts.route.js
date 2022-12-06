@@ -6,9 +6,9 @@ import CartsController from '../controllers/carts.controller';
 const routes = new Router();
 
 // Add routes
-routes.get('/cart', CartsController.findAll);
-routes.post('/cart', CartsController.create);
-routes.put('/cart/:id', CartsController.update);
-routes.delete('/cart/:id', CartsController.delete);
+routes.get('/carts', CartsController.findAll);
+routes.post('/carts', CartsController.create);
+routes.put('/carts/:id', CartsController.update);
+routes.delete('/carts/:id', CartsController.delete);
 
 export default routes;

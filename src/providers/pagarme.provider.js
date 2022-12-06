@@ -1,5 +1,4 @@
 import { cpf } from 'cpf-cnpj-validator'
-import pagarme from 'pagarme'
 import 'dotenv/config'
 
 class PagarMeProvider {
@@ -114,14 +113,8 @@ class PagarMeProvider {
                 ...itemsParams,
                 ...metadataParams
             }
+            
 
-            const client = await pagarme.client.connect({
-                api_key: process.env.PAGARME_API_KEY,
-            })
-
-            const response = await client.transactions.create(transactionParams)
-
-            console.debug("response", response)
 
         } catch (error) {
             console.error(error)
